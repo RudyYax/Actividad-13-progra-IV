@@ -8,26 +8,46 @@ class Repartidor:
     def __str__(self):
         return f"{self.nombre} - {self.paquetes} paquetes - Zona: {self.zona}"
 
-
 class EmpresaMensajeria:
     def __init__(self):
-        self.repartidores = []
+        self.repartidores = {}
 
-    def agregar_repartidor(self, repartidor):
-        if any(r.nombre.lower() == repartidor.nombre.lower() for r in self.repartidores):
-            print(f"Error: Ya existe un repartidor con el nombre '{repartidor.nombre}'. No se agrega.")
-            return False
-        if not repartidor.nombre.strip():
-            print("Error: El nombre no puede estar vacío.")
-            return False
-        if not isinstance(repartidor.paquetes, int) or repartidor.paquetes < 0:
-            print("Error: La cantidad de paquetes debe ser un entero positivo.")
-            return False
-        if not repartidor.zona.strip():
-            print("Error: La zona no puede estar vacía.")
-            return False
-        self.repartidores.append(repartidor)
-        return True
+    def agregar_Repartidores(self):
+        try:
+            cantidad = int(input(("Ingrese la cantidad de repartidores que desea guardar")))
+        except ValueError:
+            print("Ingrese un numero entero")
+            for i in range(cantidad):
+                print(f"\n Ingrese los datos del repartidor {i + 1}:")
+                while True:
+                    nombre = input("Ingrese el Nombre del repartidor: ")
+                    if nombre in self.repartidores:
+                        print("Nombre repetido no puede repetirse")
+                    else:
+                        break
+                    paquetes = int(input("Ingrese la cantidad de paquetes entregados"))
+                    zona = input("Ingrese la zona donde repartio")
+                    self.repartidores[nombre] = Repartidor(nombre, paquetes, zona)
 
-    def ordenar_por_paquetes(self):
-        self._quick_sort(0, len(self.repartidores) - 1)
+    def quick_sort(self, resultado):
+        if len(resultado) <= 1:
+            return resultado
+
+        pivote = resultado[0]
+        menor = [x for x in resultado if x.paquetes < pivote.paquetes]
+        iguales = [x for x in resultado if x.paquetes == pivote.paquetes]
+        mayor = [x for x in resultado if x.paquetes > pivote.paquetes]
+
+        return self.quick_sort(mayor) + iguales + self.quick_sort(menor)
+
+    def Buscar_Repartidor(self, resultado):
+        lista = list(self.repartidores.values())
+        for i, repartidor in enumerate(lista):
+            ordenada = self.
+
+
+
+
+
+
+
